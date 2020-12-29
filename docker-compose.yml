@@ -1,0 +1,15 @@
+version: '3'
+services:
+  dev_redis:
+    image: redis
+    container_name: redis
+    restart: on-failure
+    command: redis-server --requirepass 123sifre
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_volume:/data
+
+volumes:
+  redis_data_volume:
+    driver: local
