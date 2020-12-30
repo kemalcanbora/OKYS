@@ -1,4 +1,5 @@
 import redis
+import json
 
 
 class RedisPub:
@@ -8,3 +9,8 @@ class RedisPub:
     def set_publish(self, channel, message):
         self.r.publish(channel=channel,
                        message=message)
+
+
+RedisPub().set_publish(channel="deneme", message=json.dumps({"deneme": 13,
+                                                             "bisiler": 33,
+                                                             "vuhuuu": [{"name": "du dudu du"}]}))
