@@ -1,7 +1,7 @@
 import redis
 import json
 
-
+#pub
 class RedisPub:
     def __init__(self):
         self.r = redis.Redis(password="123sifre")
