@@ -21,6 +21,8 @@ class RedisPubSub:
                 print(message)
 
 
+#test
+
 ''' ornek - 1'''
 RedisPubSub().subscribe(channels="hakanTV")
 
