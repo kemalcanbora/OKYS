@@ -11,6 +11,6 @@ class RedisPub:
                        message=message)
 
 
-RedisPub().set_publish(channel="deneme", message=json.dumps({"deneme": 13,
+RedisPub().set_publish(channel="hakantv", message=json.dumps({"deneme": 13,
                                                              "bisiler": 33,
                                                              "vuhuuu": [{"name": "du dudu du"}]}))

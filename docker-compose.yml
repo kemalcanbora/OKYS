@@ -2,8 +2,6 @@ version: '3'
 services:
   dev_redis:
     image: redis
-    container_name: redis
-    restart: on-failure
     command: redis-server --requirepass 123sifre
     ports:
       - "6379:6379"
@@ -11,9 +9,7 @@ services:
       - redis_data_volume:/data
 
   elasticsearch:
-    container_name: elasticsearch_qa
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    restart: on-failure
     volumes:
       - es_data_volume:/data/es/db
     ports:
@@ -24,19 +20,18 @@ services:
       - ES_DATA_DIR=/data/es/db
 
   logstash:
-    container_name: logstash_qa
     image: docker.elastic.co/logstash/logstash:7.9.0
-    command: logstash -f /etc/logstash/conf.d/logstash.conf
     volumes:
-    - ./logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf:ro
+      - ./logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf:ro
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
     ports:
       - "5000:5000"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     depends_on:
       - elasticsearch
+      - dev_redis
 
 volumes:
   es_data_volume:
   redis_data_volume:
-    driver: local
